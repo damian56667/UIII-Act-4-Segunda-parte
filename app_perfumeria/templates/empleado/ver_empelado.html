@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Lista de Empleados</h3>
+<a class="btn btn-success mb-3" href="{% url 'agregar_empleado' %}">Agregar Empleado</a>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th><th>Nombre</th><th>Apellido</th><th>Puesto</th><th>Teléfono</th><th>Email</th><th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in empleados %}
+    <tr>
+      <td>{{ e.id }}</td>
+      <td>{{ e.nombre }}</td>
+      <td>{{ e.apellido }}</td>
+      <td>{{ e.puesto }}</td>
+      <td>{{ e.telefono }}</td>
+      <td>{{ e.email }}</td>
+      <td>
+        <a class="btn btn-info btn-sm" href="{% url 'actualizar_empleado' e.id %}">Editar</a>
+        <a class="btn btn-danger btn-sm" href="{% url 'borrar_empleado' e.id %}">Borrar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">No hay empleados registrados.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
